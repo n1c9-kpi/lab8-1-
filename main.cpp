@@ -1,5 +1,5 @@
 #include "functions.h"
-
+#include <string>
 int main()
 {
     element *L, *L1, *L2;
