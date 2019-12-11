@@ -1,4 +1,5 @@
 #include "functions.h"
+//tdfghfhgfghfhhggf
 
 ofstream out1("L1.txt");
 ofstream out2("L2.txt");
@@ -71,7 +72,8 @@ void Ldel(element* first)
     element *current, *prev;
     current=first->next;
     prev = first;
-    while(1){
+    while(1)
+    {
         if(first->dbl == del){
             current = first;
             first = first->next;
@@ -147,4 +149,51 @@ while (current->next != NULL)
 out2 << current->dbl << endl;
 current = current->next;
 }
+}
+
+element* SortList(element* first) {
+    element *f = first;
+    int size = SizeList(first);
+    element **adress = new element*[size];   //массив адресов
+    double *dbl = new double[size];      //массив значений элементов
+    for(int i = 0;f != NULL;i++){    //запихиваем список в массивы
+        dbl[i] = f->dbl;
+        adress[i] = f;
+        f = f->next;
+    }
+    double temp;    //"буфер обмена"
+    element* tempA;      //"буфер обмена для Адрессов"
+    for (int i = 0; i < size - 1; i++) {    //сортирование пузырьков
+        for (int j = 0; j < size - i - 1; j++) {
+            if (dbl[j] > dbl[j + 1]) {
+                temp = dbl[j];
+                tempA = adress[j];
+                dbl[j] = dbl[j + 1];
+                adress[j] = adress[j + 1];
+                dbl[j + 1] = temp;
+                adress[j + 1] = tempA;
+            }
+        }
+    }
+    first = adress[0];
+    f = first;
+    for(int i = 0;i < size - 1;i++){      //зписть элементов масиива в список
+        f->next = adress[i + 1];
+        f = f->next;
+    }
+    f->next = NULL;
+    delete[] adress;      //удаление
+    delete[] dbl;
+    return first;
+
+}
+int SizeList(element* first)
+{
+  int size=0;
+  while(first)
+  {
+    size++;
+    first=first->next;
+  }
+  return size;
 }

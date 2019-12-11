@@ -14,3 +14,5 @@ element* L2del(element* first);
 void Ldel(element* first);
 element* razdelenie(element* first, int i);
 element* EnterList();
+int SizeList(element* first);
+element* SortList(element* first);
